@@ -1,15 +1,19 @@
 package com.udacity.jdnd.course3.critter.service;
 
+import com.udacity.jdnd.course3.critter.model.Customer;
 import com.udacity.jdnd.course3.critter.model.Employee;
 import com.udacity.jdnd.course3.critter.repository.EmployeeRepository;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+@Service
 public class EmployeeService {
 
     @Autowired
@@ -32,8 +36,8 @@ public class EmployeeService {
         return this.employeeRepository.findAll();
     }
 
-    public List<Employee> getMatching(List<EmployeeSkill> requiredSkills, LocalDate date){
-        List<Employee> availableEmployees = this.employeeRepository.getAvailableByDate(date);
+    public List<Employee> getMatching(Set<EmployeeSkill> requiredSkills, DayOfWeek day){
+        List<Employee> availableEmployees = this.employeeRepository.getAvailableByDays(day);
         List<Employee> matchingEmployees = new ArrayList<>();
 
         for(Employee employee: availableEmployees){

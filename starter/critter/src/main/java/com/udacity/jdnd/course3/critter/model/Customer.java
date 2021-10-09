@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.model;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,23 +15,23 @@ public class Customer {
 
     @Nationalized
     private String name;
+    private String phoneNumber;
+    private String notes;
 
-    private String contact;
-
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ElementCollection
     private List<Pet> pets;
-
 
     public Customer() {
 
     }
 
-    public Customer(Long id, String name, String contact) {
+    public Customer(Long id, String name, String phoneNumber, String notes, List<Pet> pets) {
         this.id = id;
         this.name = name;
-        this.contact = contact;
+        this.phoneNumber = phoneNumber;
+        this.notes = notes;
+        this.pets = pets;
     }
 
     public Long getId() {
@@ -49,19 +50,37 @@ public class Customer {
         this.name = name;
     }
 
-    public String getContact() {
-        return contact;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setPets(List<Pet> pets){
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
         this.pets = pets;
     }
 
-    public List<Pet> getPets(){
-        return this.pets;
+    public List<Long> getPetIds() {
+        List<Long> petIds = new ArrayList<>();
+
+        for(Pet p: pets){
+            petIds.add(p.getId());
+        }
+        return petIds;
     }
+
 }

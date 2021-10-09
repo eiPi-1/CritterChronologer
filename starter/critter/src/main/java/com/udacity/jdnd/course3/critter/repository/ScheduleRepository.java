@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    List<Schedule> getAllByPetId(Long id);
-    List<Schedule> getAllByEmployeeId(Long id);
+    List<Schedule> getAllByPetsId(Long petId);
+    List<Schedule> getAllByEmployeesId(Long employeeId);
 }

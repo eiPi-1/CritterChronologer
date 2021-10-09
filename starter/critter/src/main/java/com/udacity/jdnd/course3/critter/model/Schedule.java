@@ -20,14 +20,12 @@ public class Schedule {
     private List<EmployeeSkill> activities;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "employee_schedule", joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "schedule_id"))
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "employee_id"))
     @ElementCollection
     private List<Employee> employees;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "pet_schedule", joinColumns = @JoinColumn(name = "pet_id"),
-            inverseJoinColumns = @JoinColumn(name = "schedule_id"))
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "pet_id") )
     @ElementCollection
     private List<Pet> pets;
 

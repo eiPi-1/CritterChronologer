@@ -1,6 +1,8 @@
 package com.udacity.jdnd.course3.critter.model;
 
 import javax.persistence.*;
+
+import com.udacity.jdnd.course3.critter.pet.PetType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Nationalized;
 import java.time.LocalDate;
@@ -13,14 +15,12 @@ public class Pet {
     @Column(name="pet_id")
     private Long id;
 
-    private String type;
+    private PetType type;
 
     @Nationalized
     private String name;
 
-    @ManyToOne(targetEntity=Customer.class, cascade=CascadeType.ALL,
-            fetch=FetchType.LAZY)
-    @JoinColumn(name="customer_id")
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer owner;
 
     private LocalDate birthDate;
@@ -33,7 +33,7 @@ public class Pet {
 
     }
 
-    public Pet(Long id, String name, Customer owner, String type) {
+    public Pet(Long id, String name, Customer owner, PetType type) {
         this.id = id;
         this.name = name;
         this.owner = owner;
@@ -66,11 +66,11 @@ public class Pet {
         this.owner = owner;
     }
 
-    public String getType() {
+    public PetType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(PetType type) {
         this.type = type;
     }
 

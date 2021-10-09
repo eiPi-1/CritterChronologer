@@ -8,11 +8,13 @@ import com.udacity.jdnd.course3.critter.repository.EmployeeRepository;
 import com.udacity.jdnd.course3.critter.repository.PetRepository;
 import org.checkerframework.checker.nullness.Opt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PetService {
 
     @Autowired
@@ -43,13 +45,15 @@ public class PetService {
 
 
     public List<Pet> getAllByOwner(Long customerId){
+        List<Long> petIds = new ArrayList<>();
         List<Pet> pets = new ArrayList<>();
 
         Optional<Customer> customer = this.customerRepository.findById(customerId);
 
         if(customer.isPresent()){
             Customer cust = customer.get();
-            pets = cust.getPets();
+            petIds = cust.getPetIds();
+            pets.addAll(this.getAllById(petIds));
         }
 
         return pets;

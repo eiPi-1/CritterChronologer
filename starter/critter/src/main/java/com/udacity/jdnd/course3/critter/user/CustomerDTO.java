@@ -1,5 +1,9 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import com.udacity.jdnd.course3.critter.model.Customer;
+import com.udacity.jdnd.course3.critter.model.Employee;
+
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -52,4 +56,5 @@ public class CustomerDTO {
     public void setPetIds(List<Long> petIds) {
         this.petIds = petIds;
     }
+
 }

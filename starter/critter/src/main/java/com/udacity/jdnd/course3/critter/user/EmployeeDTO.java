@@ -1,6 +1,9 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import com.udacity.jdnd.course3.critter.model.Employee;
+
 import java.time.DayOfWeek;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -43,5 +46,15 @@ public class EmployeeDTO {
 
     public void setDaysAvailable(Set<DayOfWeek> daysAvailable) {
         this.daysAvailable = daysAvailable;
+    }
+
+    public static EmployeeDTO toEmployeeDTO(Employee employee) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setId(employee.getId());
+        employeeDTO.setName(employee.getName());
+        employeeDTO.setSkills(new HashSet<>(employee.getSkills()));
+        employeeDTO.setDaysAvailable(new HashSet<>(employee.getAvailableDays()));
+
+        return employeeDTO;
     }
 }

@@ -5,8 +5,10 @@ import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "employee")
@@ -20,20 +22,20 @@ public class Employee {
     private String name;
 
     @ElementCollection
-    private List<EmployeeSkill> skills;
+    private Set<EmployeeSkill> skills;
 
     @ElementCollection
-    private List<LocalDate> availableDates;
+    private Set<DayOfWeek> days;
 
     public Employee() {
 
     }
 
-    public Employee(Long id, String name, List<EmployeeSkill> skills, List<LocalDate> availableDates) {
+    public Employee(Long id, String name, Set<EmployeeSkill> skills, Set<DayOfWeek> availableDays) {
         this.id = id;
         this.name = name;
         this.skills = skills;
-        this.availableDates = availableDates;
+        this.days = availableDays;
     }
 
     public Long getId() {
@@ -52,20 +54,20 @@ public class Employee {
         this.name = name;
     }
 
-    public List<EmployeeSkill> getSkills() {
+    public Set<EmployeeSkill> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<EmployeeSkill> skills) {
+    public void setSkills(Set<EmployeeSkill> skills) {
         this.skills = skills;
     }
 
-    public List<LocalDate> getAvailableDates() {
-        return availableDates;
+    public Set<DayOfWeek> getAvailableDays() {
+        return days;
     }
 
-    public void setAvailableDates(List<LocalDate> availableDates) {
-        this.availableDates = availableDates;
+    public void setAvailableDates(Set<DayOfWeek> availableDays) {
+        this.days = availableDays;
     }
 
 }
