@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Pet {
     @Id
     @GeneratedValue
-    @Column(name="pet_id")
+    //@Column(name="pet_id")
     private Long id;
 
     private PetType type;
@@ -21,6 +21,7 @@ public class Pet {
     private String name;
 
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
     private Customer owner;
 
     private LocalDate birthDate;

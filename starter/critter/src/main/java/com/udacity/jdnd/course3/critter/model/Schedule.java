@@ -5,34 +5,35 @@ import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "schedule")
 public class Schedule {
     @Id
     @GeneratedValue
-    @Column(name="schedule_id")
+    //@Column(name="schedule_id")
     private Long id;
 
     private LocalDate date;
 
     @ElementCollection
-    private List<EmployeeSkill> activities;
+    private Set<EmployeeSkill> activities;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "employee_id"))
     @ElementCollection
-    private List<Employee> employees;
+    private Set<Employee> employees;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "pet_id") )
     @ElementCollection
-    private List<Pet> pets;
+    private Set<Pet> pets;
 
     public Schedule() {
     }
 
-    public Schedule(Long id, LocalDate date, List<EmployeeSkill> activities, List<Employee> employees, List<Pet> pets) {
+    public Schedule(Long id, LocalDate date, Set<EmployeeSkill> activities, Set<Employee> employees, Set<Pet> pets) {
         this.id = id;
         this.date = date;
         this.activities = activities;
@@ -48,15 +49,15 @@ public class Schedule {
         return date;
     }
 
-    public List<EmployeeSkill> getActivities() {
+    public Set<EmployeeSkill> getActivities() {
         return activities;
     }
 
-    public List<Employee> getEmployees() {
+    public Set<Employee> getEmployees() {
         return employees;
     }
 
-    public List<Pet> getPets() {
+    public Set<Pet> getPets() {
         return pets;
     }
 
@@ -68,15 +69,15 @@ public class Schedule {
         this.date = date;
     }
 
-    public void setActivities(List<EmployeeSkill> activities) {
+    public void setActivities(Set<EmployeeSkill> activities) {
         this.activities = activities;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
 
-    public void setPets(List<Pet> pets) {
+    public void setPets(Set<Pet> pets) {
         this.pets = pets;
     }
 }

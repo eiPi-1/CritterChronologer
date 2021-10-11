@@ -52,8 +52,8 @@ public class PetController {
         }
 
         Pet savedPet = this.petService.add(newPet);
-        petDTO.setId(savedPet.getId());
-        this.toPetDTO(newPet);
+        //petDTO.setId(savedPet.getId());
+        petDTO = this.toPetDTO(savedPet);
 
         return petDTO;
     }

@@ -43,19 +43,24 @@ public class ScheduleService {
         return this.scheduleRepository.getAllByEmployeesId(employeeId);
     }
 
-    public List<Schedule> getCustomerSchedules(Long customerId) throws ObjectNotFoundException {
+    public List<Schedule> getCustomerSchedules(Long customerId) {
         List<Schedule> schedules = new ArrayList<>();
-        String errMsg = "Customer with id=" + customerId.toString() + " not found!";
 
         Optional<Customer> optCustomer = this.customerRepository.findById(customerId);
-        Customer customer = (Customer) optCustomer.orElseThrow(() -> new ObjectNotFoundException(errMsg));
 
-        List<Long> petIds = customer.getPetIds();
+        if (optCustomer.isPresent()) {
+            Customer customer = optCustomer.get();
+            List<Long> petIds = customer.getPetIds();
 
-        for(Long petId: petIds){
-            schedules.addAll(this.scheduleRepository.getAllByPetsId(petId));
+            for(Long petId: petIds){
+                schedules.addAll(this.scheduleRepository.getAllByPetsId(petId));
+            }
         }
 
         return schedules;
+    }
+
+    public List<Schedule> getAll(){
+        return this.scheduleRepository.findAll();
     }
 }

@@ -15,7 +15,7 @@ import java.util.Set;
 public class Employee {
     @Id
     @GeneratedValue
-    @Column(name="employee_id")
+    //@Column(name="employee_id")
     private Long id;
 
     @Nationalized

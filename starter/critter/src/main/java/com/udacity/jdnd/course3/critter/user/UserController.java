@@ -57,9 +57,13 @@ public class UserController {
 
         newCustomer.setPets(pets);
         Customer savedCustomer = this.customerService.add(newCustomer);
-        customerDTO.setId(savedCustomer.getId());
 
-        return customerDTO;
+        CustomerDTO savedCustomerDTO = this.toCustomerDTO(savedCustomer);
+        //customerDTO.setId(savedCustomer.getId());
+
+        //return customerDTO;
+
+        return savedCustomerDTO;
     }
 
     @GetMapping("/customer")
@@ -86,6 +90,7 @@ public class UserController {
 
         Employee newEmployee = new Employee();
 
+        newEmployee.setId(employeeDTO.getId());
         newEmployee.setName(employeeDTO.getName());
         newEmployee.setSkills(employeeDTO.getSkills());
         newEmployee.setAvailableDates(employeeDTO.getDaysAvailable());
@@ -105,7 +110,7 @@ public class UserController {
             return this.toEmployeeDTO(employeeOptional.get());
         }
 
-        return null;
+        return this.toEmployeeDTO(employeeOptional.get());
     }
 
     @PutMapping("/employee/{employeeId}")
@@ -130,10 +135,18 @@ public class UserController {
 
     public EmployeeDTO toEmployeeDTO(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(employee.getId());
-        employeeDTO.setName(employee.getName());
-        employeeDTO.setSkills(new HashSet<>(employee.getSkills()));
-        employeeDTO.setDaysAvailable(new HashSet<>(employee.getAvailableDays()));
+
+        if (employee != null) {
+            employeeDTO.setId(employee.getId());
+            employeeDTO.setName(employee.getName());
+            if (employee.getSkills() != null){
+                employeeDTO.setSkills(new HashSet<>(employee.getSkills()));
+            }
+
+            if(employee.getAvailableDays() != null){
+                employeeDTO.setDaysAvailable(new HashSet<>(employee.getAvailableDays()));
+            }
+        }
 
         return employeeDTO;
     }
@@ -141,12 +154,15 @@ public class UserController {
     public CustomerDTO toCustomerDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
 
-        customerDTO.setName(customer.getName());
-        customerDTO.setPhoneNumber(customer.getPhoneNumber());
-        customerDTO.setNotes(customer.getNotes());
-        List<Long> petIds = new ArrayList<>();
-        petIds.addAll(customer.getPetIds());
-        customerDTO.setPetIds(petIds);
+        if (customer != null) {
+            customerDTO.setId(customer.getId());
+            customerDTO.setName(customer.getName());
+            customerDTO.setPhoneNumber(customer.getPhoneNumber());
+            customerDTO.setNotes(customer.getNotes());
+            List<Long> petIds = new ArrayList<>();
+            petIds.addAll(customer.getPetIds());
+            customerDTO.setPetIds(petIds);
+        }
 
         return customerDTO;
     }
