@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "schedule", catalog ="critter")
+@Table(name = "schedule")
 public class Schedule {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )

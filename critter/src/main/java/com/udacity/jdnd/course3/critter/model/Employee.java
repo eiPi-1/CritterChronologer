@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "employee", catalog ="critter")
+@Table(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )

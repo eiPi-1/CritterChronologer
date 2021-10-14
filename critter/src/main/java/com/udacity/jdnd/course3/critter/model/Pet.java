@@ -8,7 +8,7 @@ import org.hibernate.annotations.Nationalized;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "pet", catalog ="critter")
+@Table(name = "pet")
 public class Pet {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
