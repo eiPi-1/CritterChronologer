@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "schedule")
+@Table(name = "schedule", catalog ="critter")
 public class Schedule {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
     @Column(name = "SCHEDULE_ID", unique = true)
     private Long id;
 

@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", catalog ="critter")
 public class Employee {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
     @Column(name = "EMPLOYEE_ID", unique = true)
     private Long id;
 
@@ -22,9 +22,13 @@ public class Employee {
     private String name;
 
     @ElementCollection
+    @Enumerated(EnumType.STRING)
+    @Column(name = "SKILLS", length = 250)
     private Set<EmployeeSkill> skills;
 
     @ElementCollection
+    @Enumerated(EnumType.STRING)
+    @Column(name = "DAYS_AVAILABLE", length = 250)
     private Set<DayOfWeek> days;
 
     public Employee() {

@@ -8,13 +8,15 @@ import org.hibernate.annotations.Nationalized;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "pet")
+@Table(name = "pet", catalog ="critter")
 public class Pet {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
     //@Column(name="pet_id")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name="PET_TYPE", length = 128)
     private PetType type;
 
     @Nationalized
