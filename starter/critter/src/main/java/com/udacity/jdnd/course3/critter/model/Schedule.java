@@ -12,22 +12,22 @@ import java.util.Set;
 public class Schedule {
     @Id
     @GeneratedValue
-    //@Column(name="schedule_id")
+    @Column(name = "SCHEDULE_ID", unique = true)
     private Long id;
 
+    @Column(name="SCHEDULE_DATE")
     private LocalDate date;
 
     @ElementCollection
+    @Column(name = "SCHEDULE_ACTIVITIES")
     private Set<EmployeeSkill> activities;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    @ElementCollection
+    @ManyToMany
+    @Column(name = "SCHEDULE_EMPLOYEEIDS")
     private Set<Employee> employees;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(inverseJoinColumns = @JoinColumn(name = "pet_id") )
-    @ElementCollection
+    @ManyToMany
+    @Column(name = "SCHEDULE_PETIDS")
     private Set<Pet> pets;
 
     public Schedule() {
